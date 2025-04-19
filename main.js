@@ -108,6 +108,17 @@ pandaEarL.material.diffuseColor = new BABYLON.Color3(0.2, 0.2, 0.2); // soft bla
 const pandaEarR = pandaEarL.clone("pandaEarR");
 pandaEarR.position.x = 0.25;
 
+// === Group panda parts into one mesh ===
+const panda = new BABYLON.TransformNode("pandaGroup", scene);
+pandaBody.parent = panda;
+pandaHead.parent = panda;
+pandaEarL.parent = panda;
+pandaEarR.parent = panda;
+
+// Move full panda into view
+panda.position = new BABYLON.Vector3(0, 0, -15);
+
+
 // === BUTTERFLIES ===
 function createButterfly(x, y, z, scale = 1, speed = 0.005) {
   const butterfly = BABYLON.MeshBuilder.CreatePlane("butterfly", { size: 0.4 * scale }, scene);
