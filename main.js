@@ -87,6 +87,61 @@ const roofMat = new BABYLON.StandardMaterial("roofMat", scene);
 roofMat.diffuseColor = new BABYLON.Color3(1, 0.5, 0.5); // reddish-pink
 roof.material = roofMat;
 
+// === PANDA ===
+const pandaBody = BABYLON.MeshBuilder.CreateSphere("pandaBody", { diameter: 1 }, scene);
+pandaBody.position = new BABYLON.Vector3(0, 0.5, -10);
+const pandaMat = new BABYLON.StandardMaterial("pandaMat", scene);
+pandaMat.diffuseColor = new BABYLON.Color3(1, 1, 1); // white body
+pandaBody.material = pandaMat;
+
+const pandaHead = BABYLON.MeshBuilder.CreateSphere("pandaHead", { diameter: 0.6 }, scene);
+pandaHead.position = new BABYLON.Vector3(0, 1.2, -10);
+const headMat = new BABYLON.StandardMaterial("headMat", scene);
+headMat.diffuseColor = new BABYLON.Color3(1, 1, 1); // white head
+pandaHead.material = headMat;
+
+const pandaEarL = BABYLON.MeshBuilder.CreateSphere("pandaEarL", { diameter: 0.2 }, scene);
+pandaEarL.position = new BABYLON.Vector3(-0.25, 1.5, -10);
+pandaEarL.material = new BABYLON.StandardMaterial("earMat", scene);
+pandaEarL.material.diffuseColor = new BABYLON.Color3(0.2, 0.2, 0.2); // soft black
+
+const pandaEarR = pandaEarL.clone("pandaEarR");
+pandaEarR.position.x = 0.25;
+
+// === BUTTERFLIES ===
+function createButterfly(x, y, z, scale = 1, speed = 0.005) {
+  const butterfly = BABYLON.MeshBuilder.CreatePlane("butterfly", { size: 0.4 * scale }, scene);
+  butterfly.position = new BABYLON.Vector3(x, y, z);
+  butterfly.material = new BABYLON.StandardMaterial("butterflyMat", scene);
+  butterfly.material.diffuseColor = new BABYLON.Color3(1, 0.6, 0.8); // soft pink
+  butterfly.material.backFaceCulling = false;
+
+  scene.onBeforeRenderObservable.add(() => {
+    butterfly.position.x += Math.sin(performance.now() * 0.001 * speed) * 0.01;
+    butterfly.position.y += Math.cos(performance.now() * 0.001 * speed) * 0.005;
+  });
+}
+
+createButterfly(-5, 4, -20, 1, 0.8);
+createButterfly(6, 6, -25, 1.2, 1.1);
+
+// === BEES ===
+function createBee(x, y, z, color = new BABYLON.Color3(1, 0.9, 0.3), speed = 0.008) {
+  const bee = BABYLON.MeshBuilder.CreateSphere("bee", { diameter: 0.3 }, scene);
+  bee.position = new BABYLON.Vector3(x, y, z);
+  const beeMat = new BABYLON.StandardMaterial("beeMat", scene);
+  beeMat.diffuseColor = color;
+  bee.material = beeMat;
+
+  scene.onBeforeRenderObservable.add(() => {
+    bee.position.y += Math.sin(performance.now() * 0.001 * speed) * 0.01;
+    bee.rotation.y += 0.01;
+  });
+}
+
+createBee(3, 3, -22);
+createBee(-4, 5, -24, new BABYLON.Color3(1, 0.8, 0.5), 1.5);
+
 // Create a few clouds across the sky
 createCloud(10, 20, -29.8, 1);
 createCloud(-8, 23, -29.8, 0.8);
