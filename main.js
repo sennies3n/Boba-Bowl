@@ -54,6 +54,39 @@ function createCloud(x, y, z, scale = 1) {
   return cloud;
 }
 
+// === GROUND ===
+const ground = BABYLON.MeshBuilder.CreateGround("ground", { width: 100, height: 60 }, scene);
+const groundMat = new BABYLON.StandardMaterial("groundMat", scene);
+groundMat.diffuseColor = new BABYLON.Color3.FromHexString("#d8ffe7"); // soft minty grass
+ground.material = groundMat;
+
+// === TREE ===
+const treeTrunk = BABYLON.MeshBuilder.CreateCylinder("treeTrunk", { diameter: 0.4, height: 3 }, scene);
+treeTrunk.position = new BABYLON.Vector3(8, 1.5, -25);
+const trunkMat = new BABYLON.StandardMaterial("trunkMat", scene);
+trunkMat.diffuseColor = new BABYLON.Color3(0.4, 0.2, 0.1); // brown
+treeTrunk.material = trunkMat;
+
+const treeTop = BABYLON.MeshBuilder.CreateSphere("treeTop", { diameter: 3 }, scene);
+treeTop.position = new BABYLON.Vector3(8, 3.8, -25);
+const topMat = new BABYLON.StandardMaterial("topMat", scene);
+topMat.diffuseColor = new BABYLON.Color3(0.6, 0.9, 0.6); // soft green
+treeTop.material = topMat;
+
+// === HOUSE ===
+const houseBase = BABYLON.MeshBuilder.CreateBox("houseBase", { width: 3, height: 2, depth: 2 }, scene);
+houseBase.position = new BABYLON.Vector3(-10, 1, -25);
+const houseMat = new BABYLON.StandardMaterial("houseMat", scene);
+houseMat.diffuseColor = new BABYLON.Color3(1, 0.85, 0.6); // light orange
+houseBase.material = houseMat;
+
+const roof = BABYLON.MeshBuilder.CreateCylinder("roof", { diameter: 3.2, height: 1.5, tessellation: 3 }, scene);
+roof.rotation.z = Math.PI;
+roof.position = new BABYLON.Vector3(-10, 2.5, -25);
+const roofMat = new BABYLON.StandardMaterial("roofMat", scene);
+roofMat.diffuseColor = new BABYLON.Color3(1, 0.5, 0.5); // reddish-pink
+roof.material = roofMat;
+
 // Create a few clouds across the sky
 createCloud(10, 20, -29.8, 1);
 createCloud(-8, 23, -29.8, 0.8);
