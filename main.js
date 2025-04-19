@@ -274,6 +274,7 @@ window.addEventListener("resize", () => {
 
 // === TEMPORARY: Track game progress for unlocks ===
 // ⚠️ Move this later into real "game finished" logic
-const updatedGames = (parseInt(localStorage.getItem("gamesPlayed")) || 0) + 1;
-localStorage.setItem("gamesPlayed", updatedGames);
-
+scene.onReadyObservable.add(() => {
+  const updatedGames = (parseInt(localStorage.getItem("gamesPlayed")) || 0) + 1;
+  localStorage.setItem("gamesPlayed", updatedGames);
+});
