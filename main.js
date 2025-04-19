@@ -134,6 +134,14 @@ straw.material = strawMat;
 straw.parent = cup;
 straw.position.y = 0.3;
 
+// === PANDA IDLE ANIMATION ===
+scene.onBeforeRenderObservable.add(() => {
+  const time = performance.now() * 0.002;
+  panda.position.y = Math.sin(time) * 0.05 + 0.1; // subtle bounce
+  panda.rotation.y = Math.sin(time * 0.5) * 0.1;  // gentle sway
+});
+
+
 // === BUTTERFLIES ===
 function createButterfly(x, y, z, scale = 1, speed = 0.005) {
   const butterfly = BABYLON.MeshBuilder.CreatePlane("butterfly", { size: 0.4 * scale }, scene);
