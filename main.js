@@ -118,6 +118,21 @@ pandaEarR.parent = panda;
 // Move full panda into view
 panda.position = new BABYLON.Vector3(0, 0, -15);
 
+// === BOBA CUP ===
+const cup = BABYLON.MeshBuilder.CreateCylinder("bobaCup", { diameter: 0.2, height: 0.35 }, scene);
+const cupMat = new BABYLON.StandardMaterial("cupMat", scene);
+cupMat.diffuseColor = new BABYLON.Color3(0.9, 0.8, 1); // pastel purple
+cup.material = cupMat;
+cup.parent = panda;
+cup.position = new BABYLON.Vector3(0.25, 0.6, 0.15);
+
+// Straw
+const straw = BABYLON.MeshBuilder.CreateCylinder("bobaStraw", { diameter: 0.05, height: 0.4 }, scene);
+const strawMat = new BABYLON.StandardMaterial("strawMat", scene);
+strawMat.diffuseColor = new BABYLON.Color3(1, 0.6, 0.8); // soft pink straw
+straw.material = strawMat;
+straw.parent = cup;
+straw.position.y = 0.3;
 
 // === BUTTERFLIES ===
 function createButterfly(x, y, z, scale = 1, speed = 0.005) {
