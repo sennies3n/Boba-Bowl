@@ -108,6 +108,22 @@ pandaEarL.material.diffuseColor = new BABYLON.Color3(0.2, 0.2, 0.2); // soft bla
 const pandaEarR = pandaEarL.clone("pandaEarR");
 pandaEarR.position.x = 0.25;
 
+pandaEarR.position.x = 0.25;
+
+// ✨ DROP BELOW THIS LINE ✨
+const gamesPlayed = parseInt(localStorage.getItem("gamesPlayed")) || 0;
+const unlockedSkinIndex = Math.min(Math.floor(gamesPlayed / 5), pandaSkins.length - 1);
+const selectedSkin = pandaSkins[unlockedSkinIndex];
+
+// Apply colors
+pandaMat.diffuseColor = selectedSkin.bodyColor;
+headMat.diffuseColor = selectedSkin.headColor;
+earMat.diffuseColor = selectedSkin.earColor;
+
+// === Group panda parts into one mesh ===
+const panda = new BABYLON.TransformNode("pandaGroup", scene);
+
+
 // === Group panda parts into one mesh ===
 const panda = new BABYLON.TransformNode("pandaGroup", scene);
 pandaBody.parent = panda;
@@ -255,3 +271,9 @@ engine.runRenderLoop(() => {
 window.addEventListener("resize", () => {
   engine.resize();
 });
+
+// === TEMPORARY: Track game progress for unlocks ===
+// ⚠️ Move this later into real "game finished" logic
+const updatedGames = (parseInt(localStorage.getItem("gamesPlayed")) || 0) + 1;
+localStorage.setItem("gamesPlayed", updatedGames);
+
