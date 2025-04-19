@@ -231,3 +231,38 @@ engine.runRenderLoop(() => {
 window.addEventListener("resize", () => {
   engine.resize();
 });
+
+// === BOWLING LANE ===
+const lane = BABYLON.MeshBuilder.CreateBox("lane", {
+  width: 3,
+  height: 0.2,
+  depth: 30
+}, scene);
+lane.position.y = 0.2; // Slightly below the ball
+const laneMat = new BABYLON.StandardMaterial("laneMat", scene);
+laneMat.diffuseColor = new BABYLON.Color3(0.95, 0.89, 1); // pastel lilac
+lane.material = laneMat;
+
+// === LANE BUMPERS ===
+const leftBumper = BABYLON.MeshBuilder.CreateBox("leftBumper", {
+  width: 0.3,
+  height: 0.4,
+  depth: 30
+}, scene);
+leftBumper.position.set(-1.65, 0.3, 0);
+leftBumper.material = new BABYLON.StandardMaterial("leftBumperMat", scene);
+leftBumper.material.diffuseColor = new BABYLON.Color3(1, 0.8, 0.9); // soft pink
+
+const rightBumper = leftBumper.clone("rightBumper");
+rightBumper.position.x = 1.65;
+rightBumper.material = new BABYLON.StandardMaterial("rightBumperMat", scene);
+rightBumper.material.diffuseColor = new BABYLON.Color3(0.85, 0.95, 1); // pastel blue
+
+// === JELLY BALL ===
+const ball = BABYLON.MeshBuilder.CreateSphere("jellyBall", { diameter: 0.5 }, scene);
+ball.position = new BABYLON.Vector3(0, 0.5, 13);
+const ballMat = new BABYLON.StandardMaterial("ballMat", scene);
+ballMat.diffuseColor = new BABYLON.Color3(0.9, 0.8, 1); // soft jelly purple
+ballMat.alpha = 0.9; // translucent
+ball.material = ballMat;
+
