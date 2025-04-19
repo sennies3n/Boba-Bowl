@@ -129,10 +129,6 @@ earMat.diffuseColor = selectedSkin.earColor;
 
 // === Group panda parts into one mesh ===
 const panda = new BABYLON.TransformNode("pandaGroup", scene);
-
-
-// === Group panda parts into one mesh ===
-const panda = new BABYLON.TransformNode("pandaGroup", scene);
 pandaBody.parent = panda;
 pandaHead.parent = panda;
 pandaEarL.parent = panda;
