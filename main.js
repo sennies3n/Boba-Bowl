@@ -153,6 +153,43 @@ function createBee(x, y, z, color = new BABYLON.Color3(1, 0.9, 0.3), speed = 0.0
 createBee(3, 3, -22);
 createBee(-4, 5, -24, new BABYLON.Color3(1, 0.8, 0.5), 1.5);
 
+// === SPARKLY TRAILS ===
+function createTrailEmitter(sourceMesh, scene, color = new BABYLON.Color4(1, 1, 1, 0.6)) {
+  const particleSystem = new BABYLON.ParticleSystem("sparkleTrail", 200, scene);
+  particleSystem.particleTexture = new BABYLON.Texture("https://www.babylonjs-playground.com/textures/flare.png", scene);
+  particleSystem.emitter = sourceMesh;
+  particleSystem.minEmitBox = new BABYLON.Vector3(0, 0, 0);
+  particleSystem.maxEmitBox = new BABYLON.Vector3(0, 0, 0);
+  particleSystem.color1 = color;
+  particleSystem.color2 = color;
+  particleSystem.colorDead = new BABYLON.Color4(1, 1, 1, 0);
+  particleSystem.minSize = 0.05;
+  particleSystem.maxSize = 0.1;
+  particleSystem.minLifeTime = 0.3;
+  particleSystem.maxLifeTime = 0.5;
+  particleSystem.emitRate = 20;
+  particleSystem.blendMode = BABYLON.ParticleSystem.BLENDMODE_STANDARD;
+  particleSystem.gravity = new BABYLON.Vector3(0, 0, 0);
+  particleSystem.direction1 = new BABYLON.Vector3(0, 0, 0);
+  particleSystem.direction2 = new BABYLON.Vector3(0, 0, 0);
+  particleSystem.minAngularSpeed = 0;
+  particleSystem.maxAngularSpeed = Math.PI;
+  particleSystem.minEmitPower = 0.1;
+  particleSystem.maxEmitPower = 0.2;
+  particleSystem.updateSpeed = 0.02;
+  particleSystem.start();
+}
+
+// Apply trails to butterflies and bees (reuse from above)
+scene.meshes.forEach(mesh => {
+  if (mesh.name.includes("butterfly")) {
+    createTrailEmitter(mesh, scene, new BABYLON.Color4(1, 0.6, 0.8, 0.5)); // pink glow
+  }
+  if (mesh.name.includes("bee")) {
+    createTrailEmitter(mesh, scene, new BABYLON.Color4(1, 1, 0.6, 0.6)); // golden yellow
+  }
+});
+
 // Create a few clouds across the sky
 createCloud(10, 20, -29.8, 1);
 createCloud(-8, 23, -29.8, 0.8);
