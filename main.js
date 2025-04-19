@@ -98,7 +98,7 @@ const lane = BABYLON.MeshBuilder.CreateBox("lane", {
   height: 0.2,
   depth: 30
 }, scene);
-lane.position.y = -0.1; // Slightly below the ball
+lane.position.y = 0.2; // Slightly below the ball
 lane.material = new BABYLON.StandardMaterial("laneMat", scene);
 lane.material.diffuseColor = new BABYLON.Color3(0.95, 0.89, 1); // pastel lilac
 
@@ -108,13 +108,14 @@ const leftBumper = BABYLON.MeshBuilder.CreateBox("leftBumper", {
   height: 0.4,
   depth: 30
 }, scene);
-leftBumper.position.set(-1.65, 0.1, 0);
+leftBumper.position.set(-1.65, 0.3, 0);
 leftBumper.material = new BABYLON.StandardMaterial("leftBumperMat", scene);
 leftBumper.material.diffuseColor = new BABYLON.Color3(1, 0.8, 0.9); // soft pink
 
 // Create right bumper
 const rightBumper = leftBumper.clone("rightBumper");
 rightBumper.position.x = 1.65;
+rightBumper.position.y = 0.3
 rightBumper.material = new BABYLON.StandardMaterial("rightBumperMat", scene);
 rightBumper.material.diffuseColor = new BABYLON.Color3(0.85, 0.95, 1); // pastel blue
 
