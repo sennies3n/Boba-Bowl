@@ -7,6 +7,13 @@ const engine = new BABYLON.Engine(canvas, true);
 // Create the scene
 const scene = new BABYLON.Scene(engine);
 
+// === TEMPORARY: Track game progress for unlocks ===
+// ⚠️ Move this later into real "game finished" logic
+scene.onReadyObservable.add(() => {
+  const updatedGames = (parseInt(localStorage.getItem("gamesPlayed")) || 0) + 1;
+  localStorage.setItem("gamesPlayed", updatedGames);
+});
+
 // Create a simple camera that orbits around the scene
 const camera = new BABYLON.ArcRotateCamera("Camera", 
   Math.PI / 2, Math.PI / 3, 20, BABYLON.Vector3.Zero(), scene);
@@ -270,11 +277,4 @@ engine.runRenderLoop(() => {
 // Handle window resize
 window.addEventListener("resize", () => {
   engine.resize();
-});
-
-// === TEMPORARY: Track game progress for unlocks ===
-// ⚠️ Move this later into real "game finished" logic
-scene.onReadyObservable.add(() => {
-  const updatedGames = (parseInt(localStorage.getItem("gamesPlayed")) || 0) + 1;
-  localStorage.setItem("gamesPlayed", updatedGames);
 });
