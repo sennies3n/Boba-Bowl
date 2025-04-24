@@ -284,8 +284,9 @@ const swishSound = new Audio("swish-sound.mp3");
 
 // 🎯 Create drag arrow indicators
 function createDragArrows() {
-  dragArrowLeft = BABYLON.MeshBuilder.CreatePlane("arrowLeft", { size: 0.5 }, scene);
-  dragArrowRight = dragArrowLeft.clone("arrowRight");
+  const dragArrowLeft = BABYLON.MeshBuilder.CreatePlane("arrowLeft", { size: 0.5 }, scene);
+  const dragArrowRight = dragArrowLeft.clone("arrowRight");
+
 
   dragArrowLeft.position.z = ball.position.z + 0.5;
   dragArrowRight.position.z = ball.position.z + 0.5;
