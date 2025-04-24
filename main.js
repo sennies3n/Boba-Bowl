@@ -79,8 +79,7 @@ function createCloud(x, y, z, scale = 1) {
 
 function createTrailEmitter(sourceMesh, scene, color = new BABYLON.Color4(1, 1, 1, 0.6)) {
     // Check if particle system already exists for this mesh to avoid duplicates
-    if (scene.getParticleSystemByName(sourceMesh.name + "_sparkleTrail")) {
-        return;
+    if (scene.getParticleSystemById(sourceMesh.name + "_sparkleTrail")) {
     }
     const particleSystem = new BABYLON.ParticleSystem(sourceMesh.name + "_sparkleTrail", 200, scene);
     // Use a more performant texture or create one dynamically if possible
