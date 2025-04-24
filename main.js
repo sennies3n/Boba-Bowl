@@ -10,6 +10,7 @@ const engine = new BABYLON.Engine(canvas, true, {
 
 // Create the scene
 const scene = new BABYLON.Scene(engine);
+console.log("Babylon.js Scene object created."); // <-- ADD HERE
 
 // === Configuration & Constants ===
 const PANDA_POS = new BABYLON.Vector3(0, 0, -15); // Panda's base position
@@ -27,8 +28,11 @@ const STATIC_OBJECT_RESTITUTION = 0.2;
 const LAUNCH_IMPULSE_FORCE = 8; // Force applied to the ball on launch
 
 // === Physics Engine Setup ===
-const cannonPlugin = new BABYLON.CannonJSPlugin(true, 10, cannon); // Use global 'cannon' loaded from script
-scene.enablePhysics(new BABYLON.Vector3(0, -9.81, 0), cannonPlugin); // Enable physics with gravity
+console.log("Attempting physics setup..."); // <-- ADD HERE
+console.log("Checking 'cannon' object BEFORE plugin creation:", typeof cannon); // <-- ADD HERE
+const cannonPlugin = new BABYLON.CannonJSPlugin(true, 10, cannon); // This is existing line 30
+scene.enablePhysics(new BABYLON.Vector3(0, -9.81, 0), cannonPlugin); // This is existing line 31
+console.log("Physics setup complete."); // <-- ADD HERE
 
 // === Game State Variables ===
 let isDragging = false;
