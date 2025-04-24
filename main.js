@@ -14,10 +14,16 @@ scene.onReadyObservable.add(() => {
   localStorage.setItem("gamesPlayed", updatedGames);
 });
 
-// Create a simple camera that orbits around the scene
-const camera = new BABYLON.ArcRotateCamera("Camera", 
-  Math.PI / 2, Math.PI / 3, 20, BABYLON.Vector3.Zero(), scene);
-camera.attachControl(canvas, true);
+// === FIXED CAMERA SETUP ===
+const camera = new BABYLON.FollowCamera("FollowCam", new BABYLON.Vector3(0, 5, -10), scene);
+camera.radius = 10;
+camera.heightOffset = 4;
+camera.rotationOffset = 0;
+camera.cameraAcceleration = 0.05;
+camera.maxCameraSpeed = 20;
+
+// NOTE: We’ll attach it to the ball later
+camera.lockedTarget = null;
 
 // Add a soft light
 const light = new BABYLON.HemisphericLight("light", 
@@ -265,4 +271,5 @@ const ballMat = new BABYLON.StandardMaterial("ballMat", scene);
 ballMat.diffuseColor = new BABYLON.Color3(0.9, 0.8, 1); // soft jelly purple
 ballMat.alpha = 0.9; // translucent
 ball.material = ballMat;
+camera.lockedTarget = ball;
 
