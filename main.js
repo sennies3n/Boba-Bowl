@@ -287,17 +287,17 @@ function createDragArrows() {
   dragArrowLeft = BABYLON.MeshBuilder.CreatePlane("arrowLeft", { size: 0.5 }, scene);
   dragArrowRight = dragArrowLeft.clone("arrowRight");
 
-  dragArrowLeft.position = new BABYLON.Vector3(-0.8, 1, 13.2);
-  dragArrowRight.position = new BABYLON.Vector3(0.8, 1, 13.2);
+  dragArrowLeft.position.z = ball.position.z + 0.5;
+  dragArrowRight.position.z = ball.position.z + 0.5;
 
   const arrowMat = new BABYLON.StandardMaterial("arrowMat", scene);
-  arrowMat.diffuseColor = new BABYLON.Color3(1, 0.85, 0.9); // jelly pink
-  arrowMat.alpha = 0.7;
+ arrowMat.diffuseColor = new BABYLON.Color3(1, 0.3, 0.8); // vibrant jelly pink
+  arrowMat.alpha = 1;
   dragArrowLeft.material = arrowMat;
   dragArrowRight.material = arrowMat;
 
-  dragArrowLeft.isVisible = false;
-  dragArrowRight.isVisible = false;
+  dragArrowLeft.isVisible = true;
+  dragArrowRight.isVisible = true;
 }
 createDragArrows();
 
@@ -338,4 +338,5 @@ canvas.addEventListener("pointerup", () => {
     }
   });
 });
+
 
