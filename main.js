@@ -126,7 +126,7 @@ pandaBody.parent = panda;
 pandaHead.parent = panda;
 pandaEarL.parent = panda;
 pandaEarR.parent = panda;
-
+cup.parent = panda;
 panda.position = new BABYLON.Vector3(0, 0, -15);
 
 // === CONTINUED ===
