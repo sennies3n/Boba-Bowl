@@ -24,7 +24,7 @@ const BALL_RESTITUTION = 0.5; // Bounciness (0 = no bounce, 1 = fully elastic)
 const BALL_FRICTION = 0.2;
 const STATIC_OBJECT_FRICTION = 0.1;
 const STATIC_OBJECT_RESTITUTION = 0.2;
-const LAUNCH_IMPULSE_ сила = 8; // Force applied to the ball on launch
+const LAUNCH_IMPULSE_FORCE = 8; // Force applied to the ball on launch
 
 // === Physics Engine Setup ===
 const cannonPlugin = new BABYLON.CannonJSPlugin(true, 10, cannon); // Use global 'cannon' loaded from script
