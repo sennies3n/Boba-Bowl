@@ -273,3 +273,69 @@ ballMat.alpha = 0.9; // translucent
 ball.material = ballMat;
 camera.lockedTarget = ball;
 
+let isDragging = false;
+let hasLaunched = false;
+let dragStartX = 0;
+let dragArrowLeft, dragArrowRight;
+
+// 🎵 Load audio
+const boopSound = new Audio("drag-cue.mp3");  // should play when user touches the ball
+const swishSound = new Audio("swish-sound.mp3");
+
+// 🎯 Create drag arrow indicators
+function createDragArrows() {
+  dragArrowLeft = BABYLON.MeshBuilder.CreatePlane("arrowLeft", { size: 0.5 }, scene);
+  dragArrowRight = dragArrowLeft.clone("arrowRight");
+
+  dragArrowLeft.position = new BABYLON.Vector3(-0.8, 1, 13.2);
+  dragArrowRight.position = new BABYLON.Vector3(0.8, 1, 13.2);
+
+  const arrowMat = new BABYLON.StandardMaterial("arrowMat", scene);
+  arrowMat.diffuseColor = new BABYLON.Color3(1, 0.85, 0.9); // jelly pink
+  arrowMat.alpha = 0.7;
+  dragArrowLeft.material = arrowMat;
+  dragArrowRight.material = arrowMat;
+
+  dragArrowLeft.isVisible = false;
+  dragArrowRight.isVisible = false;
+}
+createDragArrows();
+
+// 📱 Drag controls
+canvas.addEventListener("pointerdown", (evt) => {
+  if (hasLaunched) return;
+  const pickResult = scene.pick(evt.clientX, evt.clientY);
+  if (pickResult.hit && pickResult.pickedMesh === ball) {
+    isDragging = true;
+    dragStartX = evt.clientX;
+    boopSound.play();
+    dragArrowLeft.isVisible = true;
+    dragArrowRight.isVisible = true;
+  }
+});
+
+canvas.addEventListener("pointermove", (evt) => {
+  if (!isDragging || hasLaunched) return;
+  const dx = evt.clientX - dragStartX;
+  const moveX = BABYLON.Scalar.Clamp(ball.position.x + dx * 0.005, -1.2, 1.2);
+  ball.position.x = moveX;
+  dragStartX = evt.clientX;
+});
+
+canvas.addEventListener("pointerup", () => {
+  if (!isDragging || hasLaunched) return;
+  isDragging = false;
+  hasLaunched = true;
+  dragArrowLeft.isVisible = false;
+  dragArrowRight.isVisible = false;
+  swishSound.play();
+
+  // 🚀 Launch forward
+  const launchSpeed = 0.25;
+  scene.onBeforeRenderObservable.add(() => {
+    if (ball.position.z > -15) {
+      ball.position.z -= launchSpeed;
+    }
+  });
+});
+
