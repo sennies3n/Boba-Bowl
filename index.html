@@ -1,33 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Boba-Bowl 3D</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Boba Bowling!</title>
 
-  <!-- Babylon.js + Ammo.js Physics + GUI -->
-  <script src="https://cdn.babylonjs.com/babylon.js"></script>
-  <script src="https://cdn.babylonjs.com/ammo.js"></script>
-  <script src="https://cdn.babylonjs.com/gui/babylon.gui.min.js"></script>
+    <!-- Basic Styling to make canvas fill the screen -->
+    <style>
+        html, body {
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #aee2ff; /* Match initial sky color */
+        }
 
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      height: 100%;
-    }
-
-    canvas {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-  </style>
+        #renderCanvas {
+            width: 100%;
+            height: 100%;
+            touch-action: none; /* Prevent default touch actions */
+        }
+    </style>
 </head>
 <body>
-  <canvas id="renderCanvas"></canvas>
-  <script src="main.js"></script>
+    <!-- The canvas element where Babylon.js will render the scene -->
+    <canvas id="renderCanvas"></canvas>
+
+    <!-- Babylon.js Core Library -->
+    <!-- You can replace this with a specific version or a local file if preferred -->
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+
+    <!-- Cannon.js Physics Engine -->
+    <!-- Included via CDN. Must come AFTER babylon.js and BEFORE main.js -->
+    <script src="https://cdn.jsdelivr.net/npm/cannon@0.6.2/build/cannon.min.js"></script>
+
+    <!-- Your Game Logic -->
+    <!-- This is where your main game code resides -->
+    <script src="main.js"></script>
 </body>
 </html>
-
