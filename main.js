@@ -29,8 +29,10 @@ const LAUNCH_IMPULSE_FORCE = 8; // Force applied to the ball on launch
 
 // === Physics Engine Setup ===
 console.log("Attempting physics setup..."); // <-- ADD HERE
-console.log("Checking 'cannon' object BEFORE plugin creation:", typeof cannon); // <-- ADD HERE
-const cannonPlugin = new BABYLON.CannonJSPlugin(true, 10, cannon); // This is existing line 30
+// Change this line:
+console.log("Checking 'cannon' object BEFORE plugin creation:", typeof cannon, "Checking 'CANNON':", typeof CANNON); // <-- ADD HERE
+// Change this line:
+const cannonPlugin = new BABYLON.CannonJSPlugin(true, 10, CANNON); // Use UPPERCASE CANNON
 scene.enablePhysics(new BABYLON.Vector3(0, -9.81, 0), cannonPlugin); // This is existing line 31
 console.log("Physics setup complete."); // <-- ADD HERE
 
